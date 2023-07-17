@@ -6,7 +6,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../data/svg_data.dart';
 
 class Toolbox extends StatefulWidget {
-  const Toolbox({super.key});
+  const Toolbox({required this.width, super.key});
+
+  final double width; 
 
   @override
   State<Toolbox> createState() => _ToolboxState();
@@ -62,7 +64,7 @@ class _ToolboxState extends State<Toolbox> {
         onTap: startImageTimer,
         child: SvgPicture.string(
           svgData.toolboxList[currentIndex],
-          width: 400,
+          width: widget.width,
         ),
       ),
     );
