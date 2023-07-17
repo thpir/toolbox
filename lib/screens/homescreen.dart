@@ -13,24 +13,21 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>{
+
   // Method to display the about dialog with information about me and the app.
   Future<void> _showAboutDialog() async {
     return showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        CustomAboutDialog customAboutDialog = CustomAboutDialog();
-        return customAboutDialog.getDialog(context);
-      }
-    );
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          CustomAboutDialog customAboutDialog = CustomAboutDialog();
+          return customAboutDialog.getDialog(context);
+        });
   }
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -41,20 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Center(
-        child: Stack(
-          children: [
-            Container(
-              width: width,
-              height: height,
-              alignment: Alignment.bottomCenter,
-              child: Toolbox(
-                width: width-20,
-              ),
-            )
-          ],
-        ),
-      ),
+      body: const Toolbox(),
       drawer: const HomeDrawer(),
     );
   }
