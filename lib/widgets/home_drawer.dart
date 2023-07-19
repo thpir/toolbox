@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
-
-import './list_tile_ui.dart';
+import 'package:localization/localization.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key});
+  const HomeDrawer({
+    required this.avatarPath, 
+    required this.appName, 
+    required this.drawerContent, 
+    super.key
+  });
+
+  final String avatarPath;
+  final String appName;
+  final List<Widget> drawerContent;
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +22,14 @@ class HomeDrawer extends StatelessWidget {
           DrawerHeader(
             child: Column(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage('assets/images/icon_toolbox_color.png'),
+                  backgroundImage:
+                      AssetImage(avatarPath),
                 ),
                 const Spacer(),
                 Text(
-                  'Toolbox Settings',
+                  appName + 'home_drawer_widget_title'.i18n(),
                   style: Theme.of(context).textTheme.titleLarge,
                 )
               ],
@@ -29,16 +38,7 @@ class HomeDrawer extends StatelessWidget {
           SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Select your theme:',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ),
-                const ListTileUi(),
-              ],
+              children: drawerContent,
             ),
           ),
         ],

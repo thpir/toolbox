@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
 import '../shared_prefs/ui_theme_preference.dart';
@@ -34,10 +35,17 @@ class _ListTileUiState extends State<ListTileUi> {
     final themeChange = Provider.of<UiThemeProvider>(context);
     return Column(
       children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'list_tile_ui_widget_title'.i18n(),
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+        ),
         RadioListTile(
             activeColor: Colors.amber,
             title: Text(
-              'UI-mode',
+              'list_tile_ui_widget_radio_list_tile_ui'.i18n(),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             value: 'ui',
@@ -51,7 +59,7 @@ class _ListTileUiState extends State<ListTileUi> {
         RadioListTile(
             activeColor: Colors.amber,
             title: Text(
-              'Dark-mode',
+              'list_tile_ui_widget_radio_list_tile_dark'.i18n(),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             value: 'dark',
@@ -65,7 +73,7 @@ class _ListTileUiState extends State<ListTileUi> {
         RadioListTile(
             activeColor: Colors.amber,
             title: Text(
-              'Light-mode',
+              'list_tile_ui_widget_radio_list_tile_light'.i18n(),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             value: 'light',

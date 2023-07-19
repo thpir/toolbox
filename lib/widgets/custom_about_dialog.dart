@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomAboutDialog {
@@ -13,20 +14,20 @@ class CustomAboutDialog {
 
   AlertDialog getDialog(BuildContext context) {
     return AlertDialog(
-      title: const Text('About this app'),
+      title: Text('custom_about_dialog_title'.i18n()),
       content: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text('Toolbox is a collection of useful tools that are a must-have on every smartphone. Instead of loads of different small apps I have bundeled them into one super-app, making it a digital swiss army knife!'),
+            Text('custom_about_dialog_text_1'.i18n()),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 5),
             ),
-            const Text('If you like my work, please consider buying me a coffee.'),
+            Text('custom_about_dialog_text_2'.i18n()),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 5),
             ),
-            const Text('Created by'),
+            Text('custom_about_dialog_text_3'.i18n()),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 5),
             ),
@@ -50,7 +51,7 @@ class CustomAboutDialog {
             Navigator.of(context).pop();
           },
           label: Text(
-            'Buy Coffee',
+            'custom_about_dialog_button_coffee'.i18n(),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           icon: Icon(
@@ -63,7 +64,7 @@ class CustomAboutDialog {
             Navigator.of(context).pop();
           },
           label: Text(
-            'Close',
+            'custom_about_dialog_button_close'.i18n(),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           icon: Icon(

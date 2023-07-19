@@ -1,0 +1,30 @@
+{
+    "app_name": "Toolbox",
+
+    "WIDGETS": "WIDGETS",
+
+        "toolbox_widget_textfield_labeltext": "Search app...",
+        "toolbox_widget_textfield_hinttext": "Search app...",
+
+        "toolbox_instructions_widget_instruction_text": "Tab the toolbox to access your tools",
+        
+        "list_tile_ui_widget_title": "Select your theme:",
+        "list_tile_ui_widget_radio_list_tile_ui": "UI-mode",
+        "list_tile_ui_widget_radio_list_tile_dark": "Dark-mode",
+        "list_tile_ui_widget_radio_list_tile_light": "Light-mode",
+        
+        "home_drawer_widget_title": " Settings",
+
+        "custom_about_dialog_title": "About this app",
+        "custom_about_dialog_text_1": "Toolbox is a collection of useful tools that are a must-have on every smartphone. Instead of loads of different small apps I have bundeled them into one super-app, making it a digital swiss army knife!",
+        "custom_about_dialog_text_2": "If you like my work, please consider buying me a coffee.",
+        "custom_about_dialog_text_3": "Created by",
+        "custom_about_dialog_button_coffee": "Buy Coffee",
+        "custom_about_dialog_button_close": "Close",
+
+    "APPS": "APPS",
+
+        "ruler_app": "Ruler",
+        "compass_app": "Compass",
+        "qr_code_app": "QR-Code"
+}

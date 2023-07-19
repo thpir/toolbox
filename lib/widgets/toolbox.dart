@@ -2,12 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:localization/localization.dart';
 
 import '../data/svg_data.dart';
 import '../data/app_list.dart';
 import '../models/app.dart';
-import './app_tile.dart';
+import './toolbox_instructions.dart';
+import './app_gridview.dart';
 
 class Toolbox extends StatefulWidget {
   const Toolbox({super.key});
@@ -35,10 +36,10 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
     _animationController = AnimationController(
       vsync: this,
       duration:
-          const Duration(milliseconds: 500), // Adjust the duration as needed
+          const Duration(milliseconds: 500),
     );
     _animation = Tween<Offset>(
-      begin: Offset(0, 1),
+      begin: const Offset(0, 1),
       end: Offset.zero,
     ).animate(CurvedAnimation(
       parent: _animationController,
@@ -114,63 +115,8 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Container(
-          width: width,
-          height: height,
-          color: Theme.of(context).scaffoldBackgroundColor,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Tab the toolbox to access your tools',
-                  style: Theme.of(context).textTheme.titleLarge,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Icon(
-                  Icons.ads_click,
-                  color: Theme.of(context).focusColor,
-                  size: 50,
-                ),
-              ],
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.topCenter,
-          child: Container(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            height: height, //height - (width * 0.5),
-            child: SlideTransition(
-              position: _animation,
-              child: Visibility(
-                visible: _isListViewVisible,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
-                    padding: EdgeInsets.only(
-                        left: 20, right: 20, top: 80, bottom: width * 0.6),
-                    itemCount: searchList.length,
-                    itemBuilder: (context, index) {
-                      return AppTile(
-                        name: searchList[index].name,
-                        assetpath: searchList[index].assetPath,
-                        size: width / 3.5,
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+        ToolboxInstructions(width: width, height: height),
+        AppGridview(height: height, animation: _animation, isListViewVisible: _isListViewVisible, width: width, searchList: searchList),
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
@@ -208,17 +154,22 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
           alignment: Alignment.topCenter,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-            child: TextField(
-              controller: textController,
-              onChanged: ((value) {
-                filterSearchResults(value);
-              }),
-              decoration: InputDecoration(
-                  labelText: "Search app...",
-                  hintText: "Search app...",
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+            child: Container(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              child: TextField(
+                controller: textController,
+                onChanged: ((value) {
+                  filterSearchResults(value);
+                }),
+                decoration: InputDecoration(
+                  labelText: 'toolbox_widget_textfield_labeltext'.i18n(),
+                  hintText: 'toolbox_widget_textfield_hinttext'.i18n(),
+                  prefixIcon: const Icon(Icons.search),
+                  border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(25.0))
+                  ),
+                ),
+              ),
             ),
           ),
         )

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 
 import '../widgets/toolbox.dart';
 import '../widgets/custom_about_dialog.dart';
 import '../widgets/home_drawer.dart';
+import '../widgets/list_tile_ui.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({required this.title, super.key});
-
-  final String title;
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('app_name'.i18n()),
         actions: [
           IconButton(
             onPressed: _showAboutDialog,
@@ -39,7 +39,11 @@ class _HomeScreenState extends State<HomeScreen>{
         ],
       ),
       body: const Toolbox(),
-      drawer: const HomeDrawer(),
+      drawer: HomeDrawer(
+        avatarPath: 'assets/images/icon_toolbox_color.png',
+        appName: 'app_name'.i18n(),
+        drawerContent: const [ListTileUi()],
+      ),
     );
   }
 }
