@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:anim_search_bar/anim_search_bar.dart';
 
 import '../data/svg_data.dart';
+import '../data/app_list.dart';
+import '../models/app.dart';
 import './app_tile.dart';
 
 class Toolbox extends StatefulWidget {
@@ -15,16 +18,20 @@ class Toolbox extends StatefulWidget {
 
 class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
   SvgData svgData = SvgData();
+  AppList appList = AppList();
+  var searchList = <App>[];
   int currentIndex = 0;
   bool closed = true;
   Timer? timer;
   late AnimationController _animationController;
   late Animation<Offset> _animation;
   bool _isListViewVisible = false;
+  TextEditingController textController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    searchList = appList.appList;
     _animationController = AnimationController(
       vsync: this,
       duration:
@@ -43,6 +50,14 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  void filterSearchResults(String query) {
+    setState(() {
+      searchList = appList.appList
+          .where((app) => app.name.toLowerCase().contains(query))
+          .toList();
+    });
   }
 
   void _toggleListViewVisibility() {
@@ -128,18 +143,30 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
           alignment: Alignment.topCenter,
           child: Container(
             color: Theme.of(context).scaffoldBackgroundColor,
-            height: height - (width * 0.5),
+            height: height, //height - (width * 0.5),
             child: SlideTransition(
               position: _animation,
               child: Visibility(
                 visible: _isListViewVisible,
-                child: ListView.builder(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    itemCount: 20, // Adjust the number of items as needed
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    padding: EdgeInsets.only(
+                        left: 20, right: 20, top: 80, bottom: width * 0.6),
+                    itemCount: searchList.length,
                     itemBuilder: (context, index) {
-                      return AppTile();
+                      return AppTile(
+                        name: searchList[index].name,
+                        assetpath: searchList[index].assetPath,
+                        size: width / 3.5,
+                      );
                     },
                   ),
+                ),
               ),
             ),
           ),
@@ -153,8 +180,13 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
               gradient: LinearGradient(
                 colors: <Color>[
                   Theme.of(context).scaffoldBackgroundColor,
+                  Theme.of(context).scaffoldBackgroundColor,
+                  Theme.of(context).scaffoldBackgroundColor,
+                  Theme.of(context).scaffoldBackgroundColor,
                   Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
                 ],
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
               ),
             ),
             alignment: Alignment.bottomCenter,
@@ -172,6 +204,24 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
             ),
           ),
         ),
+        Align(
+          alignment: Alignment.topCenter,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            child: TextField(
+              controller: textController,
+              onChanged: ((value) {
+                filterSearchResults(value);
+              }),
+              decoration: InputDecoration(
+                  labelText: "Search app...",
+                  hintText: "Search app...",
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+            ),
+          ),
+        )
       ],
     );
   }

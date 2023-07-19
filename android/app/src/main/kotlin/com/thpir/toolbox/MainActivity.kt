@@ -1,4 +1,4 @@
-package com.example.toolbox
+package com.thpir.toolbox
 
 import io.flutter.embedding.android.FlutterActivity
 

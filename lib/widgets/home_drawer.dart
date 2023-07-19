@@ -16,7 +16,7 @@ class HomeDrawer extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage('assets/images/toolbox.png'),
+                  backgroundImage: AssetImage('assets/images/icon_toolbox_color.png'),
                 ),
                 const Spacer(),
                 Text(
