@@ -87,7 +87,7 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
   }
 
   void startImageTimer() {
-    timer = Timer.periodic(const Duration(milliseconds: 50), (Timer t) {
+    timer = Timer.periodic(const Duration(milliseconds: 15), (Timer t) {
       if (closed) {
         if (currentIndex == svgData.toolboxList.length - 1) {
           timer?.cancel();

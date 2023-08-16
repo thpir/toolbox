@@ -7,6 +7,7 @@ import 'package:localization/localization.dart';
 import './providers/ui_theme_provider.dart';
 import './theme/my_themes.dart';
 import './screens/homescreen.dart';
+import './screens/ruler_homescreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,7 +69,10 @@ class _MyAppState extends State<MyApp> {
             // default language
             return const Locale('en', 'US');
           },
-          home: HomeScreen(),
+          home: const HomeScreen(),
+          routes: {
+            RulerHomescreen.routeName: (ctx) => const RulerHomescreen(),
+          },
         ),
       ),
     );

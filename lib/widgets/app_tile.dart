@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../models/app.dart';
+
 class AppTile extends StatelessWidget {
   const AppTile(
       {required this.name,
@@ -19,7 +21,13 @@ class AppTile extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            print('$name clicked!');
+            Navigator.pushNamed(
+              context, route, arguments: App(
+                name: name,
+                assetPath: assetpath,
+                route: route,
+              ),
+            );
           },
           child: Card(
             shape: RoundedRectangleBorder(
