@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
-import '../shared_prefs/ui_theme_preference.dart';
+import '../shared_prefs/preferences.dart';
 import '../providers/ui_theme_provider.dart';
 
 class ListTileUi extends StatefulWidget {
@@ -26,7 +26,7 @@ class _ListTileUiState extends State<ListTileUi> {
   }
 
   Future<String> getUiTheme() async {
-    UiThemePreference uiThemePreferene = UiThemePreference();
+    Preferences uiThemePreferene = Preferences();
     return uiThemePreferene.getUiTheme();
   }
 
