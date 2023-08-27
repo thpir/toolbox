@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../shared_prefs/preferences.dart';
+import '../preferences.dart';
 
 class CalibrationProvider extends ChangeNotifier {
 

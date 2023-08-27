@@ -1,16 +1,16 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:toolbox/widgets/vertical_ruler.dart';
 
-import '../widgets/home_drawer.dart';
-import '../widgets/list_tile_ui.dart';
-import '../models/app.dart';
-import '../models/ruler.dart';
-import '../providers/calibration_provider.dart';
-import '../providers/metrics_provider.dart';
+import '../widgets/ruler_home_screen_widgets/horizontal_ruler.dart';
+import '../widgets/ruler_home_screen_widgets/vertical_ruler.dart';
+import '../widgets/ruler_home_screen_widgets/ruler_origin.dart';
+import '../widgets/ruler_home_screen_widgets/sliders.dart';
+import '../widgets/general_widgets/home_drawer.dart';
+import '../widgets/general_widgets/list_tile_ui.dart';
+import '../../models/app.dart';
+import '../../controllers/ruler_controller.dart';
+import '../../controllers/storage/shared_prefs/shared_prefs_providers/calibration_provider.dart';
+import '../../controllers/storage/shared_prefs/shared_prefs_providers/metrics_provider.dart';
 
 class RulerHomescreen extends StatefulWidget {
   static const routeName = '/ruler-homescreen';
@@ -27,7 +27,7 @@ class _RulerHomescreenState extends State<RulerHomescreen> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as App;
-    Ruler ruler = Ruler(context);
+    RulerController rulerController = RulerController(context);
 
     return MultiProvider(
       providers: [
@@ -51,16 +51,30 @@ class _RulerHomescreenState extends State<RulerHomescreen> {
             ],
           ),
           body: FutureBuilder(
-              future: ruler.getPhoneDpi(),
+              future: rulerController.getPhoneDpi(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
                 } else {
+                  rulerController.mm = metrics.metrics;
+                  rulerController.standardCalibration = calibrationMode.calibrationMode;
+                  rulerController.calibrationValue = calibrationMode.calibrationValue;
                   return Stack(
                     children: <Widget>[
-                      Text('Future Ruler, dpi=${ruler.dpi}')
+                      VerticalRuler(
+                          rulerController: rulerController,
+                      ),
+                      HorizontalRuler(
+                          rulerController: rulerController,
+                      ),
+                      RulerOrigin(
+                        rulerController: rulerController,
+                      ),
+                      Sliders(
+                        rulerController: rulerController,
+                      )
                     ],
                   );
                 }

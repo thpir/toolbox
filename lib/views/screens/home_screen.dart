@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
-import '../widgets/toolbox.dart';
-import '../widgets/custom_about_dialog.dart';
-import '../widgets/home_drawer.dart';
-import '../widgets/list_tile_ui.dart';
+import '../widgets/home_screen_widgets/toolbox.dart';
+import '../widgets/home_screen_widgets/custom_about_dialog.dart';
+import '../widgets/general_widgets/home_drawer.dart';
+import '../widgets/general_widgets/list_tile_ui.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

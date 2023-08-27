@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../models/app.dart';
-import './app_tile.dart';
+import '../../../models/app.dart';
+import 'app_tile.dart';
 
 class AppGridview extends StatelessWidget {
   const AppGridview({

@@ -4,10 +4,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:localization/localization.dart';
 
-import './providers/ui_theme_provider.dart';
-import './theme/my_themes.dart';
-import './screens/homescreen.dart';
-import './screens/ruler_homescreen.dart';
+import 'controllers/storage/shared_prefs/shared_prefs_providers/ui_theme_provider.dart';
+import 'views/theme/my_themes.dart';
+import 'views/screens/home_screen.dart';
+import 'views/screens/ruler_home_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // set json file directory for languages
-    LocalJsonLocalization.delegate.directories = ['lib/i18n'];
+    LocalJsonLocalization.delegate.directories = ['lib/controllers/languages/i18n'];
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UiThemeProvider>(

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
-import '../shared_prefs/preferences.dart';
-import '../providers/ui_theme_provider.dart';
+import '../../../controllers/storage/shared_prefs/preferences.dart';
+import '../../../controllers/storage/shared_prefs/shared_prefs_providers/ui_theme_provider.dart';
 
 class ListTileUi extends StatefulWidget {
   const ListTileUi({super.key});

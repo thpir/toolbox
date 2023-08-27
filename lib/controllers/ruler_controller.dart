@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'screen_props.dart';
+import '../models/screen_props.dart';
 
-class Ruler {
+class RulerController {
   late double screenHeight;
-  late double screenWidgth;
+  late double screenWidth;
   late double appBarHeight;
   late double paddingBottom;
   late double paddingTop;
-  late double dpiFixed;
+  late double paddingLeft;
+  late double paddingRight;
   late double pixelRatio;
+  late double sliderHeight;
+  late double sliderWidth;
   late BuildContext ctx;
-  late bool mm;
   late bool standardCalibration;
   late double calibrationValue;
   late double dpi;
+  late bool mm;
   static const platform = MethodChannel('thpir/dpi');
 
-  Ruler(BuildContext context) {
+  RulerController(BuildContext context) {
     screenHeight = ScreenProps.getScreenHeight(context);
-    screenWidgth = ScreenProps.getScreenWidth(context);
+    screenWidth = ScreenProps.getScreenWidth(context);
     appBarHeight = ScreenProps.getAppBarHeight();
     paddingBottom = ScreenProps.getPaddingBottom(context);
     paddingTop = ScreenProps.getPaddingTop(context);
-    dpiFixed = ScreenProps.dpiFixed;
+    paddingLeft = ScreenProps.getPaddingLeft(context);
+    paddingRight = ScreenProps.getPaddingRight(context);
+    sliderHeight = screenHeight - appBarHeight - paddingBottom - paddingTop;
+    sliderWidth = screenWidth - paddingLeft - paddingRight;
+    dpi = ScreenProps.dpiFixed;
     pixelRatio = ScreenProps.getPixelRatio(context);
     ctx = context;
-    
   }
 
   /// This method will use platform specific code to try to retrieve the phone's
@@ -47,7 +53,7 @@ class Ruler {
 
   double getPixelCountInMm() {
     if (standardCalibration) {
-      return dpiFixed / pixelRatio / 25.4;
+      return dpi / pixelRatio / 25.4;
     } else {
       return calibrationValue;
     }
@@ -55,7 +61,7 @@ class Ruler {
 
   double getPixelCountInInches() {
     if (standardCalibration) {
-      return dpiFixed / pixelRatio / 8;
+      return dpi / pixelRatio / 8;
     } else {
       return calibrationValue * 25.4 / 8;
     }
@@ -68,6 +74,14 @@ class Ruler {
             .floor()
         : ((screenHeight - appBarHeight - paddingBottom - paddingTop) /
                 getPixelCountInInches())
+            .floor();
+  }
+
+  int getNumberOfHorizontalRulerPins() {
+    return mm
+        ? ((screenWidth - paddingLeft - paddingRight) / getPixelCountInMm())
+            .floor()
+        : ((screenWidth - paddingLeft - paddingRight) / getPixelCountInInches())
             .floor();
   }
 
@@ -115,6 +129,22 @@ class Ruler {
     }).toList();
   }
 
+  // This method returns a list of ruler pins that are rendered across the
+  //horizontal axis of the phone screen
+  List<Container> horizontalRulerPin(int count) {
+    return List.generate(count, (index) {
+      return Container(
+        width: index == 0 ? getPixelCountInMm() + 1 : getPixelCountInMm(),
+        height: rulerPinWidth(index),
+        decoration: BoxDecoration(
+          border: Border(
+            right: BorderSide(width: 1, color: Theme.of(ctx).focusColor),
+          ),
+        ),
+      );
+    }).toList();
+  }
+
   /// This method returns a list of digits that acompany the ruler pins
   ///rendered along the vertical axis of the phone
   List<SizedBox> verticalRulerDigits(int count) {
@@ -134,6 +164,36 @@ class Ruler {
               style: TextStyle(
                 fontSize: 20,
                 color: Theme.of(ctx).focusColor,
+              ),
+            )),
+      );
+    }).toList();
+  }
+
+  // This method returns a list of digits that acompany the ruler pins
+  //rendered along the vertical axis of the phone
+  List<SizedBox> horizontalRulerDigits(int count) {
+    return List.generate(count, (index) {
+      return SizedBox(
+        width: mm
+            ? (index == 0 ? getPixelCountInMm() * 12 : getPixelCountInMm() * 10)
+            : (index == 0
+                ? getPixelCountInMm() * 8.4
+                : getPixelCountInMm() * 8),
+        child: Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: mm
+                  ? (index < 9
+                      ? const EdgeInsets.only(right: 4.0)
+                      : const EdgeInsets.only(right: 0.0))
+                  : const EdgeInsets.only(right: 0.0),
+              child: Text(
+                (index + 1).toString(),
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Theme.of(ctx).focusColor,
+                ),
               ),
             )),
       );

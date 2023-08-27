@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:localization/localization.dart';
 
-import '../data/svg_data.dart';
-import '../data/app_list.dart';
-import '../models/app.dart';
-import './toolbox_instructions.dart';
-import './app_gridview.dart';
+import '../../../models/data/svg_data.dart';
+import '../../../models/data/app_list.dart';
+import '../../../models/app.dart';
+import 'toolbox_instructions.dart';
+import 'app_gridview.dart';
 
 class Toolbox extends StatefulWidget {
   const Toolbox({super.key});

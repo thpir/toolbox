@@ -19,6 +19,14 @@ class ScreenProps {
     return MediaQuery.of(context).padding.bottom;
   }
 
+  static double getPaddingLeft(BuildContext context) {
+    return MediaQuery.of(context).padding.left;
+  }
+
+  static double getPaddingRight(BuildContext context) {
+    return MediaQuery.of(context).padding.right;
+  }
+
   static double getAppBarHeight() {
     return AppBar().preferredSize.height;
   }

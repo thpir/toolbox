@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/app.dart';
+import '../../../models/app.dart';
 
 class AppTile extends StatelessWidget {
   const AppTile(

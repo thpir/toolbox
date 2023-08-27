@@ -1,6 +1,6 @@
 import 'package:localization/localization.dart';
 
-import '../models/app.dart';
+import '../app.dart';
 
 class AppList {
   List<App> appList = [
