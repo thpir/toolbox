@@ -34,6 +34,7 @@ class _ListTileUiState extends State<ListTileUi> {
   Widget build(BuildContext context) {
     final themeChange = Provider.of<UiThemeProvider>(context);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),

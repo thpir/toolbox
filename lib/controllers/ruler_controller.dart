@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:localization/localization.dart';
 
 import '../models/screen_props.dart';
+import 'storage/databases/database_provider.dart/database_provider.dart';
+import 'message_controller.dart';
 
 class RulerController {
   late double screenHeight;
@@ -20,6 +25,7 @@ class RulerController {
   late double dpi;
   late bool mm;
   static const platform = MethodChannel('thpir/dpi');
+  MessageController messageHelper = MessageController();
 
   RulerController(BuildContext context) {
     screenHeight = ScreenProps.getScreenHeight(context);
@@ -198,5 +204,16 @@ class RulerController {
             )),
       );
     }).toList();
+  }
+
+  // Save measured value to the database.
+  void saveMeasurement(String savedValue, BuildContext context) {
+    var now = DateTime.now();
+    var formatter = DateFormat('EEEE, MMMM d, y');
+    String formattedDate = formatter.format(now);
+    Provider.of<DatabaseProvider>(context, listen: false)
+        .addMeasurement(savedValue, formattedDate);
+    ScaffoldMessenger.of(context).showSnackBar(messageHelper
+        .getInformationalSnackbar('confirm_message_saved'.i18n(), context));
   }
 }

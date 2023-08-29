@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:localization/localization.dart';
 
 import 'controllers/storage/shared_prefs/shared_prefs_providers/ui_theme_provider.dart';
+import 'controllers/storage/databases/database_provider.dart/database_provider.dart';
 import 'views/theme/my_themes.dart';
 import 'views/screens/home_screen.dart';
 import 'views/screens/ruler_home_screen.dart';
@@ -37,11 +38,14 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // set json file directory for languages
-    LocalJsonLocalization.delegate.directories = ['lib/controllers/languages/i18n'];
+    LocalJsonLocalization.delegate.directories = ['lib/views/languages/i18n'];
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UiThemeProvider>(
           create: (_) => UiThemeProvider(),
+        ),
+        ChangeNotifierProvider<DatabaseProvider>(
+          create: (_) => DatabaseProvider(),
         ),
       ],
       child: Consumer<UiThemeProvider>(

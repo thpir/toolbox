@@ -7,6 +7,7 @@ import '../widgets/ruler_home_screen_widgets/ruler_origin.dart';
 import '../widgets/ruler_home_screen_widgets/sliders.dart';
 import '../widgets/general_widgets/home_drawer.dart';
 import '../widgets/general_widgets/list_tile_ui.dart';
+import '../widgets/general_widgets/list_tile_metrics.dart';
 import '../../models/app.dart';
 import '../../controllers/ruler_controller.dart';
 import '../../controllers/storage/shared_prefs/shared_prefs_providers/calibration_provider.dart';
@@ -82,7 +83,7 @@ class _RulerHomescreenState extends State<RulerHomescreen> {
           drawer: HomeDrawer(
             appName: args.name,
             avatarPath: args.assetPath,
-            drawerContent: const [ListTileUi()],
+            drawerContent: const [ListTileUi(), ListTileMetrics()],
           ),
         ),
       ),
