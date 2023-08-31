@@ -107,11 +107,11 @@ class RulerController {
       if (index < 3) {
         return 0;
       } else if ((index + 1) % 8 == 0) {
-        return (getPixelCountInMm() * 8 / 25.4) * 6;
+        return (getPixelCountInInches() * 8 / 25.4) * 6;
       } else if ((index + 1) % 2 == 0) {
-        return (getPixelCountInMm() * 8 / 25.4) * 4.5;
+        return (getPixelCountInInches() * 8 / 25.4) * 4.5;
       } else {
-        return (getPixelCountInMm() * 8 / 25.4) * 3;
+        return (getPixelCountInInches() * 8 / 25.4) * 3;
       }
     }
   }
@@ -121,7 +121,9 @@ class RulerController {
   List<Container> verticalRulerPin(int count) {
     return List.generate(count, (index) {
       return Container(
-        height: index == 0 ? getPixelCountInMm() + 1 : getPixelCountInMm(),
+        height: index == 0 
+        ? mm ? getPixelCountInMm() + 1  : getPixelCountInInches() + 1
+        : mm ? getPixelCountInMm() : getPixelCountInInches(),
         width: rulerPinWidth(index),
         decoration: BoxDecoration(
           border: Border(
@@ -140,7 +142,9 @@ class RulerController {
   List<Container> horizontalRulerPin(int count) {
     return List.generate(count, (index) {
       return Container(
-        width: index == 0 ? getPixelCountInMm() + 1 : getPixelCountInMm(),
+        width: index == 0 
+        ? mm ? getPixelCountInMm() + 1 : getPixelCountInInches()
+        : mm? getPixelCountInMm() : getPixelCountInInches(),
         height: rulerPinWidth(index),
         decoration: BoxDecoration(
           border: Border(
@@ -157,10 +161,13 @@ class RulerController {
     return List.generate(count, (index) {
       return SizedBox(
         height: mm
-            ? (index == 0 ? getPixelCountInMm() * 12 : getPixelCountInMm() * 10)
+            ? (index == 0 
+                ? getPixelCountInMm() * 12
+                : getPixelCountInMm() * 10
+              )
             : (index == 0
-                ? getPixelCountInMm() * 8.6
-                : getPixelCountInMm() * 8),
+                ? getPixelCountInInches() * 8.6
+                : getPixelCountInInches() * 8),
         child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
@@ -182,10 +189,12 @@ class RulerController {
     return List.generate(count, (index) {
       return SizedBox(
         width: mm
-            ? (index == 0 ? getPixelCountInMm() * 12 : getPixelCountInMm() * 10)
+            ? (index == 0 
+                ? getPixelCountInMm() * 12 
+                : getPixelCountInMm() * 10)
             : (index == 0
-                ? getPixelCountInMm() * 8.4
-                : getPixelCountInMm() * 8),
+                ? getPixelCountInInches() * 8.4
+                : getPixelCountInInches() * 8),
         child: Align(
             alignment: Alignment.bottomRight,
             child: Padding(

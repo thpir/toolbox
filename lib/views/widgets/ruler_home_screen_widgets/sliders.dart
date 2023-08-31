@@ -34,12 +34,12 @@ class _SlidersState extends State<Sliders> {
         availableWidthInMm: (widget.rulerController.sliderWidth - 50) /
             (metricsProvider.metrics
                 ? widget.rulerController.getPixelCountInMm()
-                : widget.rulerController.getPixelCountInMm() * 8),
+                : widget.rulerController.getPixelCountInInches() * 8),
         sliderWidth: widget.rulerController.sliderWidth,
         availableHeightInMm: (widget.rulerController.sliderHeight - 50) /
             (metricsProvider.metrics
                 ? widget.rulerController.getPixelCountInMm()
-                : widget.rulerController.getPixelCountInMm() * 8),
+                : widget.rulerController.getPixelCountInInches() * 8),
       ),
     );
   }
