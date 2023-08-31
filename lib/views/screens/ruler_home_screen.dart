@@ -40,7 +40,15 @@ class _RulerHomescreenState extends State<RulerHomescreen> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: const Icon(Icons.home))
+                icon: const Icon(Icons.home)),
+            IconButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed('/ruler-measurement-list-screen');
+            },
+            icon: const Icon(
+              Icons.history_sharp,
+            ),
+          ),
           ],
         ),
         body: FutureBuilder(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
 import '../../../controllers/storage/shared_prefs/preferences.dart';
@@ -14,8 +15,8 @@ class ListTileMetrics extends StatefulWidget {
 class _ListTileMetricsState extends State<ListTileMetrics> {
   bool metrics = true;
   final List<Widget> _metrics = <Widget>[
-    const Text('Millimeters'),
-    const Text('Inches'),
+    Text('millimeters'.i18n()),
+    Text('inches'.i18n()),
   ];
 
   final List<bool> _selectedMetrics = <bool>[
@@ -62,7 +63,7 @@ class _ListTileMetricsState extends State<ListTileMetrics> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            'Select unit:',
+            'select_unit_subtitle'.i18n(),
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),

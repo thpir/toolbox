@@ -33,9 +33,18 @@
         "compass_app": "Compass",
         "qr_code_app": "QR-Code",
 
-    "SCREENS": "SCREENS",
+    "RULER": "RULER",
 
         "appbar_calibration_text": "Calibrate Ruler",
+        "appbar_history_text": "Measurement History",
         "calibration_explanation_text_mm": "Measure 5 centimeters & tab the save button to calibrate. Drag the edge of the colored box to resize the ruler.",
-        "calibration_explanation_text_inch": "Measure 2 inches & tab the save button to calibrate. Drag the edge of the colored box to resize the ruler."
+        "calibration_explanation_text_inch": "Measure 2 inches & tab the save button to calibrate. Drag the edge of the colored box to resize the ruler.",
+        "confirm_message_saved": "Measurement Saved!",
+        "millimeters": "Millimeters",
+        "inches": "Inches",
+        "select_unit_subtitle": "Select unit:",
+        "edit_title": "Edit label",
+        "button_text_cancel": "Cancel",
+        "button_text_save": "Save",
+        "no_measurements_text": "No measurements yet..."
 }

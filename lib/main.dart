@@ -12,6 +12,8 @@ import 'views/theme/my_themes.dart';
 import 'views/screens/home_screen.dart';
 import 'views/screens/ruler_home_screen.dart';
 import 'views/screens/ruler_calibration_screen.dart';
+import 'views/screens/ruler_measurements_list_screen.dart';
+import 'views/screens/compass_home_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -86,6 +88,8 @@ class _MyAppState extends State<MyApp> {
           routes: {
             RulerHomescreen.routeName: (ctx) => const RulerHomescreen(),
             RulerCalibrationScreen.routeName: (ctx) => const RulerCalibrationScreen(),
+            RulerMeasurementsListScreen.routeName: (ctx) => const RulerMeasurementsListScreen(),
+            CompassHomeScreen.routeName: (ctx) => const CompassHomeScreen(),
           },
         ),
       ),
