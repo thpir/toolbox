@@ -116,15 +116,54 @@ class RulerController {
     }
   }
 
+  double rulerCalibrationPinWidth(int index) {
+      if (mm) {
+        if ((index + 1) % 10 == 0) {
+          return 40;
+        } else {
+          return 20;
+        }
+      } else {
+        if ((index + 1) % 8 == 0) {
+          return 40;
+        } else if ((index + 1) % 2 == 0) {
+          return 30;
+        } else {
+          return 20;
+        }
+      }
+    }
+
   /// This method returns a list of ruler pins that are rendered across the
   /// vertical axis of the phone screen
   List<Container> verticalRulerPin(int count) {
     return List.generate(count, (index) {
       return Container(
-        height: index == 0 
-        ? mm ? getPixelCountInMm() + 1  : getPixelCountInInches() + 1
-        : mm ? getPixelCountInMm() : getPixelCountInInches(),
+        height: index == 0
+            ? mm
+                ? getPixelCountInMm() + 1
+                : getPixelCountInInches() + 1
+            : mm
+                ? getPixelCountInMm()
+                : getPixelCountInInches(),
         width: rulerPinWidth(index),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              width: 1,
+              color: Theme.of(ctx).focusColor,
+            ),
+          ),
+        ),
+      );
+    }).toList();
+  }
+
+  List<Container> verticalCalibrationRulerPin(int count, double height) {
+    return List.generate(count, (index) {
+      return Container(
+        height: mm ? (height / 50) : (height / 16),
+        width: rulerCalibrationPinWidth(index),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
@@ -142,9 +181,13 @@ class RulerController {
   List<Container> horizontalRulerPin(int count) {
     return List.generate(count, (index) {
       return Container(
-        width: index == 0 
-        ? mm ? getPixelCountInMm() + 1 : getPixelCountInInches()
-        : mm? getPixelCountInMm() : getPixelCountInInches(),
+        width: index == 0
+            ? mm
+                ? getPixelCountInMm() + 1
+                : getPixelCountInInches()
+            : mm
+                ? getPixelCountInMm()
+                : getPixelCountInInches(),
         height: rulerPinWidth(index),
         decoration: BoxDecoration(
           border: Border(
@@ -161,10 +204,7 @@ class RulerController {
     return List.generate(count, (index) {
       return SizedBox(
         height: mm
-            ? (index == 0 
-                ? getPixelCountInMm() * 12
-                : getPixelCountInMm() * 10
-              )
+            ? (index == 0 ? getPixelCountInMm() * 12 : getPixelCountInMm() * 10)
             : (index == 0
                 ? getPixelCountInInches() * 8.6
                 : getPixelCountInInches() * 8),
@@ -189,9 +229,7 @@ class RulerController {
     return List.generate(count, (index) {
       return SizedBox(
         width: mm
-            ? (index == 0 
-                ? getPixelCountInMm() * 12 
-                : getPixelCountInMm() * 10)
+            ? (index == 0 ? getPixelCountInMm() * 12 : getPixelCountInMm() * 10)
             : (index == 0
                 ? getPixelCountInInches() * 8.4
                 : getPixelCountInInches() * 8),

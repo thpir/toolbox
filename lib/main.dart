@@ -5,10 +5,13 @@ import 'package:provider/provider.dart';
 import 'package:localization/localization.dart';
 
 import 'controllers/storage/shared_prefs/shared_prefs_providers/ui_theme_provider.dart';
+import 'controllers/storage/shared_prefs/shared_prefs_providers/metrics_provider.dart';
+import 'controllers/storage/shared_prefs/shared_prefs_providers/calibration_provider.dart';
 import 'controllers/storage/databases/database_provider.dart/database_provider.dart';
 import 'views/theme/my_themes.dart';
 import 'views/screens/home_screen.dart';
 import 'views/screens/ruler_home_screen.dart';
+import 'views/screens/ruler_calibration_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,6 +50,12 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<DatabaseProvider>(
           create: (_) => DatabaseProvider(),
         ),
+        ChangeNotifierProvider<MetricsProvider>(
+          create: (_) => MetricsProvider(),
+        ),
+        ChangeNotifierProvider<CalibrationProvider>(
+          create: (_) => CalibrationProvider(),
+        ),
       ],
       child: Consumer<UiThemeProvider>(
         builder: (context, uiMode, _) => MaterialApp(
@@ -76,6 +85,7 @@ class _MyAppState extends State<MyApp> {
           home: const HomeScreen(),
           routes: {
             RulerHomescreen.routeName: (ctx) => const RulerHomescreen(),
+            RulerCalibrationScreen.routeName: (ctx) => const RulerCalibrationScreen(),
           },
         ),
       ),

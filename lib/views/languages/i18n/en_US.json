@@ -13,6 +13,11 @@
         "list_tile_ui_widget_radio_list_tile_dark": "Dark-mode",
         "list_tile_ui_widget_radio_list_tile_light": "Light-mode",
         
+        "list_tile_calibration_title": "Ruler calibration:",
+        "list_tile_calibration_default": "Use default calibration",
+        "list_tile_calibration_custom": "Use custom calibration",
+        "list_tile_calibration_button_text": "Calibrate ruler",
+
         "home_drawer_widget_title": " Settings",
 
         "custom_about_dialog_title": "About this app",
@@ -26,5 +31,11 @@
 
         "ruler_app": "Ruler",
         "compass_app": "Compass",
-        "qr_code_app": "QR-Code"
+        "qr_code_app": "QR-Code",
+
+    "SCREENS": "SCREENS",
+
+        "appbar_calibration_text": "Calibrate Ruler",
+        "calibration_explanation_text_mm": "Measure 5 centimeters & tab the save button to calibrate. Drag the edge of the colored box to resize the ruler.",
+        "calibration_explanation_text_inch": "Measure 2 inches & tab the save button to calibrate. Drag the edge of the colored box to resize the ruler."
 }
