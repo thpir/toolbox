@@ -48,6 +48,8 @@ dependencies:
   sqflite: ^2.3.0
   path: ^1.8.3
   intl: ^0.18.1
+  permission_handler: ^10.4.3
+  flutter_compass: ^0.7.0
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +82,10 @@ flutter:
     - assets/images/icon_qr_code.png
     - assets/images/icon_toolbox.png
     - assets/images/icon_toolbox_color.png
+    - assets/images/compass_illustration_static.png
+    - assets/images/compass_illustration_dynamic.png
+    - assets/images/compass_illustration_static_dark.png
+    - assets/images/compass_illustration_dynamic_dark.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

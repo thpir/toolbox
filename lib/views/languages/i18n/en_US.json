@@ -46,5 +46,12 @@
         "edit_title": "Edit label",
         "button_text_cancel": "Cancel",
         "button_text_save": "Save",
-        "no_measurements_text": "No measurements yet..."
+        "no_measurements_text": "No measurements yet...",
+
+    "COMPASS": "COMPASS",
+
+        "no_compass_text": "This device does not have a compass...",
+        "location_needed_text": "We need your location for the compass to display correctly",
+        "permissions_text": "Request permissions",
+        "open_settings_text": "Open app settings"
 }

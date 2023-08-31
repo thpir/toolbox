@@ -34,4 +34,9 @@ class ScreenProps {
   static double getPixelRatio(BuildContext context) {
     return MediaQuery.of(context).devicePixelRatio;
   }
+
+  static bool isDarkMode(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    return brightness == Brightness.dark;
+  }
 }
