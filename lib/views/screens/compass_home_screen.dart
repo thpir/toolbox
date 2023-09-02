@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:localization/localization.dart';
-import 'package:provider/provider.dart';
 
 import '../../models/app.dart';
 import '../../models/screen_props.dart';
-import '../../controllers/storage/shared_prefs/shared_prefs_providers/ui_theme_provider.dart';
 import '../../views/widgets/general_widgets/home_drawer.dart';
 import '../../views/widgets/general_widgets/list_tile_ui.dart';
 import '../../views/widgets/compass_screen_widgets/compass.dart';

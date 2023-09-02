@@ -50,6 +50,7 @@ dependencies:
   intl: ^0.18.1
   permission_handler: ^10.4.3
   flutter_compass: ^0.7.0
+  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:

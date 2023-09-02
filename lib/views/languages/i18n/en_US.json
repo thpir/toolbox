@@ -53,5 +53,13 @@
         "no_compass_text": "This device does not have a compass...",
         "location_needed_text": "We need your location for the compass to display correctly",
         "permissions_text": "Request permissions",
-        "open_settings_text": "Open app settings"
+        "open_settings_text": "Open app settings",
+
+    "QR-CODE": "QR-CODE",
+
+        "scan_divider_text": "Scan",
+        "create_divider_text": "Create",
+        "textfield_url_text": "Enter your URL",
+        "generate_qr_code_button_text": "GENERATE QR CODE",
+        "no_qr_text": "Enter a link and tap the button to generate a QR-Code."
 }
