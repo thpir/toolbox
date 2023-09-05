@@ -51,6 +51,8 @@ dependencies:
   permission_handler: ^10.4.3
   flutter_compass: ^0.7.0
   qr_flutter: ^4.1.0
+  gallery_saver: ^2.3.2
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:

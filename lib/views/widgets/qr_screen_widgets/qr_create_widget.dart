@@ -16,8 +16,21 @@ class QRCreateWidget extends StatefulWidget {
 
 class _QRCreateWidgetState extends State<QRCreateWidget> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    final qrController = Provider.of<QRController>(context);
+    qrController.disposeController();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final qrController = Provider.of<QRController>(context);
+    qrController.initController();
     return Column(
       children: [
         QRTitleWidget(title: 'create_divider_text'.i18n()),
@@ -36,7 +49,15 @@ class _QRCreateWidgetState extends State<QRCreateWidget> {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 300),
             child: ElevatedButton.icon(
-              onPressed: () {}, // TODO
+              onPressed: qrController.disableButton
+                  ? null
+                  : () {
+                      setState(() {
+                        qrController.qrData = qrController.controller.text;
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        qrController.updateUI();
+                      });
+                    },
               icon: const Icon(
                 Icons.qr_code_2,
                 color: Colors.black,
@@ -53,55 +74,55 @@ class _QRCreateWidgetState extends State<QRCreateWidget> {
           ),
         ),
         Container(
+          width: 300,
+          height: 300,
+          alignment: Alignment.center,
+          child: Card(
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            color: Theme.of(context).colorScheme.background,
+            child: Container(
               width: 300,
               height: 300,
               alignment: Alignment.center,
-              child: Card(
-                elevation: 10,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                color: Theme.of(context).colorScheme.background,
-                child: Container(
-                  width: 300,
-                  height: 300,
-                  alignment: Alignment.center,
-                  child: qrController.qrData == ''
-                      ? const QrPlaceHolder()
-                      : Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            RepaintBoundary(
-                              key: qrController.qrKey,
-                              child: QrImageView(
-                                data: qrController.qrData,
-                                //embeddedImage: TODO,
-                                //semanticsLabel: TODO,
-                                size: 250,
-                                backgroundColor: Colors.white,
-                                version: QrVersions.auto,
-                              )
+              child: qrController.qrData == ''
+                  ? const QrPlaceHolder()
+                  : Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        RepaintBoundary(
+                            key: qrController.qrKey,
+                            child: QrImageView(
+                              data: qrController.qrData,
+                              //embeddedImage: TODO,
+                              //semanticsLabel: TODO,
+                              size: 250,
+                              backgroundColor: Colors.white,
+                              version: QrVersions.auto,
+                            )),
+                        Container(
+                          constraints: const BoxConstraints.expand(),
+                          alignment: Alignment.topRight,
+                          child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                qrController.qrData = '';
+                              });
+                              qrController.updateUI();
+                            },
+                            icon: const Icon(
+                              Icons.close,
+                              color: Colors.red,
                             ),
-                            Container(
-                              constraints: const BoxConstraints.expand(),
-                              alignment: Alignment.topRight,
-                              child: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    qrController.qrData = '';
-                                  });
-                                },
-                                icon: const Icon(
-                                  Icons.close,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                ),
-              ),
-            )
+                      ],
+                    ),
+            ),
+          ),
+        )
       ],
     );
   }

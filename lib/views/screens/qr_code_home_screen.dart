@@ -17,48 +17,66 @@ class QRCodeHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as App;
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<QRController>(
-          create: (_) => QRController(),
-        ),
-      ],
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          title: Text(args.name,
-              style: const TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20)),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(QRCodeHistoryScreen.routeName);
-              },
-              icon: const Icon(
-                Icons.history_sharp,
-              ),
-            ),
-            IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.home)),
-          ],
-        ),
-        body: const Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            QRScanWidget(),
-            QRCreateWidget(),
-          ],
-        ),
-        drawer: HomeDrawer(
-        appName: args.name,
-        avatarPath: args.assetPath,
-        drawerContent: const [ListTileUi()],
-      ),
-      ),
-    );
+        providers: [
+          ChangeNotifierProvider<QRController>(
+            create: (_) => QRController(),
+          ),
+        ],
+        child: Consumer<QRController>(
+          builder: (context, qrController, child) {
+            return Scaffold(
+                appBar: AppBar(
+                  elevation: 0,
+                  title: Text(args.name,
+                      style: const TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20)),
+                  actions: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(QRCodeHistoryScreen.routeName);
+                      },
+                      icon: const Icon(
+                        Icons.history_sharp,
+                      ),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(Icons.home)),
+                  ],
+                ),
+                body: const SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      QRScanWidget(),
+                      QRCreateWidget(),
+                    ],
+                  ),
+                ),
+                drawer: HomeDrawer(
+                  appName: args.name,
+                  avatarPath: args.assetPath,
+                  drawerContent: const [ListTileUi()],
+                ),
+                floatingActionButton: qrController.qrData == ''
+                    ? null
+                    : FloatingActionButton(
+                        onPressed: () {
+                          qrController.takeScreenShot(context);
+                          print('FAB pressed');
+                        },
+                        backgroundColor: Colors.amber,
+                        child: const Icon(
+                          Icons.save,
+                          color: Colors.black,
+                        ),
+                      ));
+          },
+        ));
   }
 }

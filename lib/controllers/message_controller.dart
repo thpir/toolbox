@@ -10,4 +10,14 @@ class MessageController {
       backgroundColor: Theme.of(context).primaryColor,
     );
   }
+
+  SnackBar getErrorSnackbar(String errorText, BuildContext context) {
+    return SnackBar(
+      content: Text(
+        errorText,
+        style: const TextStyle(color: Colors.white),
+      ),
+      backgroundColor: const Color.fromARGB(255, 186, 26, 26),
+    );
+  }
 }
