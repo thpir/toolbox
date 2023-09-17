@@ -15,7 +15,8 @@ import 'views/screens/ruler_calibration_screen.dart';
 import 'views/screens/ruler_measurements_list_screen.dart';
 import 'views/screens/compass_home_screen.dart';
 import 'views/screens/qr_code_home_screen.dart';
-import 'views/screens/qr_code_history_screen.dart';
+import 'views/screens/qr_code_scan_screen.dart';
+import 'views/screens/qr_code_result_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -93,7 +94,8 @@ class _MyAppState extends State<MyApp> {
             RulerMeasurementsListScreen.routeName: (ctx) => const RulerMeasurementsListScreen(),
             CompassHomeScreen.routeName: (ctx) => const CompassHomeScreen(),
             QRCodeHomeScreen.routeName: (ctx) => const QRCodeHomeScreen(),
-            QRCodeHistoryScreen.routeName: (ctx) => const QRCodeHistoryScreen(),
+            QRCodeScanScreen.routeName: (ctx) => const QRCodeScanScreen(),
+            QRCodeResultScreen.routeName: (ctx) => const QRCodeResultScreen(),
           },
         ),
       ),

@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../models/app.dart';
 import '../../controllers/qr_controller.dart';
-import 'qr_code_history_screen.dart';
 import '../widgets/qr_screen_widgets/qr_scan_widget.dart';
 import '../widgets/qr_screen_widgets/qr_create_widget.dart';
 import '../widgets/general_widgets/home_drawer.dart';
@@ -34,15 +33,6 @@ class QRCodeHomeScreen extends StatelessWidget {
                           fontSize: 20)),
                   actions: [
                     IconButton(
-                      onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed(QRCodeHistoryScreen.routeName);
-                      },
-                      icon: const Icon(
-                        Icons.history_sharp,
-                      ),
-                    ),
-                    IconButton(
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -68,7 +58,6 @@ class QRCodeHomeScreen extends StatelessWidget {
                     : FloatingActionButton(
                         onPressed: () {
                           qrController.takeScreenShot(context);
-                          print('FAB pressed');
                         },
                         backgroundColor: Colors.amber,
                         child: const Icon(

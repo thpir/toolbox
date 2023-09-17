@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
 import 'qr_title_widget.dart';
+import '../../screens/qr_code_scan_screen.dart';
 
 class QRScanWidget extends StatelessWidget {
   const QRScanWidget({super.key});
@@ -18,7 +19,7 @@ class QRScanWidget extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 300),
             child: ElevatedButton.icon(
               onPressed: () {
-                //Navigator.of(context).pushNamed(ScanScreen.routeName);
+                Navigator.of(context).pushNamed(QRCodeScanScreen.routeName);
               },
               icon: const Icon(
                 Icons.qr_code_scanner,
