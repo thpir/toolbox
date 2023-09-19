@@ -17,6 +17,7 @@ import 'views/screens/compass_home_screen.dart';
 import 'views/screens/qr_code_home_screen.dart';
 import 'views/screens/qr_code_scan_screen.dart';
 import 'views/screens/qr_code_result_screen.dart';
+import 'views/screens/calculator_home_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -96,6 +97,7 @@ class _MyAppState extends State<MyApp> {
             QRCodeHomeScreen.routeName: (ctx) => const QRCodeHomeScreen(),
             QRCodeScanScreen.routeName: (ctx) => const QRCodeScanScreen(),
             QRCodeResultScreen.routeName: (ctx) => const QRCodeResultScreen(),
+            CalculatorHomeScreen.routeName: (ctx) => const CalculatorHomeScreen(),
           },
         ),
       ),

@@ -86,6 +86,7 @@ flutter:
     - assets/images/icon_ruler.png
     - assets/images/icon_compass.png
     - assets/images/icon_qr_code.png
+    - assets/images/icon_calculator.png
     - assets/images/icon_toolbox.png
     - assets/images/icon_toolbox_color.png
     - assets/images/compass_illustration_static.png
