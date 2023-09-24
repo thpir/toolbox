@@ -3,6 +3,13 @@ class Calculator {
   double _memoryNumber = 0;
   String _operand = '';
   bool _clearDisplay = false;
+  bool _canCalculate = false;
+
+  setCanCalculate(bool setCanCalculate) {
+    _canCalculate = setCanCalculate;
+  }
+
+  bool get canCalculate => _canCalculate;
 
   setResult(double newResult) {
     _result = newResult;

@@ -9,7 +9,6 @@ class CalculatorController extends ChangeNotifier {
   CalculatorController(this.calculator);
 
   buttonClicked(String btnID) {
-    print('Button clicked with id: $btnID');
     switch (btnID) {
       case 'AC':
         {
@@ -64,31 +63,25 @@ class CalculatorController extends ChangeNotifier {
     }
   }
 
-  acButtonClicked() {}
-
   performCalculation(String newOperand) {
     calculator.setResult(double.parse(displayValue));
-    if (calculator.operand == '+' && calculator.memoryNumber != 0) {
-      print('+ calculation');
-      print('memoryNumber = ${calculator.memoryNumber}');
-      print('result = ${calculator.result}');
-      setDisplay((calculator.memoryNumber + calculator.result).toString());
-    } else if (calculator.operand == '-' && calculator.memoryNumber != 0) {
-      print('- calculation');
-      print('memoryNumber = ${calculator.memoryNumber}');
-      print('result = ${calculator.result}');
-      setDisplay((calculator.memoryNumber - calculator.result).toString());
-    } else if (calculator.operand == '×' && calculator.memoryNumber != 0) {
-      print('x calculation');
-      print('memoryNumber = ${calculator.memoryNumber}');
-      print('result = ${calculator.result}');
-      setDisplay((calculator.memoryNumber * calculator.result).toString());
-    } else if (calculator.operand == '÷' && calculator.memoryNumber != 0) {
-      print('÷ calculation');
-      print('memoryNumber = ${calculator.memoryNumber}');
-      print('result = ${calculator.result}');
+    if (calculator.operand == '+' &&
+        calculator.memoryNumber != 0 &&
+        calculator.canCalculate) {
+      setDisplay(removeTrailingZeros(calculator.memoryNumber + calculator.result));
+    } else if (calculator.operand == '-' &&
+        calculator.memoryNumber != 0 &&
+        calculator.canCalculate) {
+      setDisplay(removeTrailingZeros(calculator.memoryNumber - calculator.result));
+    } else if (calculator.operand == '×' &&
+        calculator.memoryNumber != 0 &&
+        calculator.canCalculate) {
+      setDisplay(removeTrailingZeros(calculator.memoryNumber * calculator.result));
+    } else if (calculator.operand == '÷' &&
+        calculator.memoryNumber != 0 &&
+        calculator.canCalculate) {
       try {
-        setDisplay((calculator.memoryNumber / calculator.result).toString());
+        setDisplay(removeTrailingZeros(calculator.memoryNumber / calculator.result));
       } catch (e) {
         setDisplay('Not a Number');
         calculator.setResult(0.0);
@@ -99,33 +92,37 @@ class CalculatorController extends ChangeNotifier {
       }
     }
     calculator.setMemoryNumber(double.parse(displayValue));
-    print('new memoryNumber set: $displayValue');
     calculator.setClrDisplayBool(true);
-    print('override is let to: ${calculator.clearDisplay}');
     calculator.setOperand(newOperand);
-    print('operand is set to: ${calculator.operand}');
+    calculator.setCanCalculate(false);
   }
 
   numberButtonClicked(int number) {
-    print('number $number was clicked');
-    print('bool clearDisplay = ${calculator.clearDisplay}');
+    calculator.setCanCalculate(true);
     if (calculator.clearDisplay) {
-      print('clearDisplay is true');
       setDisplay(number.toString());
       calculator.setClrDisplayBool(false);
     } else if (displayValue == "0") {
-      print('Display had no value yet...');
       setDisplay(number.toString());
     } else {
-      print('Added $number to display');
       setDisplay(displayValue + number.toString());
     }
   }
 
-  setDisplay(String newDisplayValue) {
-    print('Updating display...');
+  setDisplay(String newDisplayValue) {  
     displayValue = newDisplayValue;
     notifyListeners();
+  }
+
+  String removeTrailingZeros(double value) {
+    String stringValue = value.toString();
+    if (stringValue.contains('.')) {
+      stringValue = stringValue.replaceAll(RegExp(r'0*$'), ''); // Remove trailing zeros
+      if (stringValue.endsWith('.')) {
+        stringValue = stringValue.substring(0, stringValue.length - 1); // Remove trailing decimal point if it's the only character left
+      }
+    }
+    return stringValue;
   }
 
   resetDisplay() {
@@ -148,7 +145,7 @@ class CalculatorController extends ChangeNotifier {
 
   calculatePercentage() {
     double newValue = double.parse(displayValue) / 100;
-    setDisplay(newValue.toString());
+    setDisplay(removeTrailingZeros(newValue));
   }
 
   startFloating() {

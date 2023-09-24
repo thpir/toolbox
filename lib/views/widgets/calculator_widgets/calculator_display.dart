@@ -8,7 +8,8 @@ class CalculatorDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final calculatorController = Provider.of<CalculatorController>(context, listen: true);
+    final calculatorController =
+        Provider.of<CalculatorController>(context, listen: true);
     return Expanded(
       flex: 1,
       child: Padding(
@@ -22,6 +23,7 @@ class CalculatorDisplay extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(right: 16.0),
               child: Text(calculatorController.displayValue,
+                  maxLines: 1,
                   style: TextStyle(
                       color: Theme.of(context).focusColor, fontSize: 40)),
             ),
