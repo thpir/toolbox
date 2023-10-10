@@ -75,7 +75,7 @@ class QRController extends ChangeNotifier {
         controller.clear();
       }).onError((error, stackTrace) {
         ScaffoldMessenger.of(context).showSnackBar(
-            messageController.getErrorSnackbar(error.toString(), context));
+            messageController.getErrorSnackbar(error.toString()));
       });
     }
   }

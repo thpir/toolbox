@@ -11,7 +11,7 @@ class MessageController {
     );
   }
 
-  SnackBar getErrorSnackbar(String errorText, BuildContext context) {
+  SnackBar getErrorSnackbar(String errorText) {
     return SnackBar(
       content: Text(
         errorText,
