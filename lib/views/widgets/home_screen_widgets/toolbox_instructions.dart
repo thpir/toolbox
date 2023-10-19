@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
+import 'package:provider/provider.dart';
+
+import '../../../controllers/storage/shared_prefs/shared_prefs_providers/ui_theme_provider.dart';
 
 class ToolboxInstructions extends StatelessWidget {
   const ToolboxInstructions({
@@ -13,10 +16,16 @@ class ToolboxInstructions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final uiThemeProvider = Provider.of<UiThemeProvider>(context);
     return Container(
       width: width,
       height: height,
-      color: Theme.of(context).scaffoldBackgroundColor,
+      //color: Theme.of(context).scaffoldBackgroundColor,
+      decoration: BoxDecoration(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            image: DecorationImage(
+                image: uiThemeProvider.uiMode == "dark" ? const AssetImage('assets/images/background_toolbox_dark.png') : const AssetImage('assets/images/background_toolbox.png'),
+                fit: BoxFit.cover)),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

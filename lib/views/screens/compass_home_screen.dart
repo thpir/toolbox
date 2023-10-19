@@ -7,6 +7,7 @@ import '../../models/screen_props.dart';
 import '../../views/widgets/general_widgets/home_drawer.dart';
 import '../../views/widgets/general_widgets/list_tile_ui.dart';
 import '../../views/widgets/compass_screen_widgets/compass.dart';
+import '../../views/widgets/compass_screen_widgets/map.dart';
 
 class CompassHomeScreen extends StatefulWidget {
   static const routeName = '/compass-homescreen';
@@ -18,6 +19,14 @@ class CompassHomeScreen extends StatefulWidget {
 
 class _CompassHomeScreenState extends State<CompassHomeScreen> {
   bool _hasPermissions = false;
+  bool _centered = true;
+  static const _alignments = [
+    Alignment.center,
+    Alignment.topLeft,
+  ];
+
+  AlignmentGeometry get _alignment =>
+      _centered ? _alignments[0] : _alignments[1];
 
   @override
   void initState() {
@@ -86,17 +95,62 @@ class _CompassHomeScreenState extends State<CompassHomeScreen> {
               icon: const Icon(Icons.home)),
         ],
       ),
-      body: Center(child: Builder(builder: (context) {
-        if (_hasPermissions) {
-          return Compass(width: width);
-        } else {
-          return getDialog(context);
-        }
-      })),
+      body: Stack(
+        children: _centered 
+          ? <Widget>[
+            AnimatedAlign(
+              alignment: _alignment,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              child: AnimatedSize(
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+                child: Builder(builder: (context) {
+                  if (_hasPermissions) {
+                    return Compass(width: _centered ? width : 100, centered: _centered,);
+                  } else {
+                    return getDialog(context);
+                  }
+                }),
+              ),
+            ),
+          ] 
+        : <Widget>[
+            const Map(),
+            AnimatedAlign(
+              alignment: _alignment,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              child: AnimatedSize(
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+                child: Builder(builder: (context) {
+                  if (_hasPermissions) {
+                    return Compass(width: _centered ? width : 100, centered: _centered,);
+                  } else {
+                    return getDialog(context);
+                  }
+                }),
+              ),
+            ),
+          ] ,
+      ),
       drawer: HomeDrawer(
         appName: args.name,
         avatarPath: args.assetPath,
         drawerContent: const [ListTileUi()],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            _centered = !_centered;
+          });
+        },
+        backgroundColor: Colors.amber,
+        child: Icon(
+          _centered ? Icons.map_outlined : Icons.navigation_outlined, 
+          color: Colors.black,
+        ),
       ),
     );
   }

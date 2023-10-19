@@ -58,6 +58,8 @@ dependencies:
   flutter_contacts: ^1.1.7+1
   ar_flutter_plugin: ^0.7.3
   vector_math: ^2.1.4
+  flutter_osm_plugin: ^0.60.5
+  torch_light: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -92,10 +94,15 @@ flutter:
     - assets/images/icon_toolbox.png
     - assets/images/icon_toolbox_color.png
     - assets/images/icon_3d_ruler.png
+    - assets/images/icon_flashlight.png
     - assets/images/compass_illustration_static.png
     - assets/images/compass_illustration_dynamic.png
     - assets/images/compass_illustration_static_dark.png
     - assets/images/compass_illustration_dynamic_dark.png
+    - assets/images/background_toolbox.png
+    - assets/images/background_toolbox_dark.png
+    - assets/images/international_morse_code.png
+    - assets/images/international_morse_code_dark.png
     - assets/pin_final.bin
     - assets/pin_final.gltf
 

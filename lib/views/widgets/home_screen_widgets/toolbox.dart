@@ -140,8 +140,9 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
               width: double.infinity,
               height: double.infinity,
               alignment: Alignment.bottomCenter,
-              child: GestureDetector(
+              child: InkWell(
                 onTap: startImageTimer,
+                onDoubleTap: startImageTimer,
                 child: SvgPicture.string(
                   svgData.toolboxList[currentIndex],
                   width: width,
