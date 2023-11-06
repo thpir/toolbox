@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
+//import 'color_schemes.g.dart';
+
 class MyThemes {
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primarySwatch: Colors.amber,
     focusColor: Colors.black,
     scaffoldBackgroundColor: Colors.white,
+    useMaterial3: false,
+    //colorScheme: lightColorScheme,
     textTheme: const TextTheme(
       titleLarge: TextStyle(
         color: Colors.black,
@@ -33,6 +37,8 @@ class MyThemes {
     primarySwatch: Colors.amber,
     focusColor: Colors.white,
     scaffoldBackgroundColor: Colors.grey[900],
+    useMaterial3: false,
+    //colorScheme: darkColorScheme,
     textTheme: const TextTheme(
       titleLarge: TextStyle(
         color: Colors.white,
