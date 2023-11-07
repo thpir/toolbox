@@ -19,7 +19,7 @@ import 'views/screens/qr_code_scan_screen.dart';
 import 'views/screens/qr_code_result_screen.dart';
 import 'views/screens/calculator_home_screen.dart';
 import 'views/screens/ar_ruler_home_screen.dart';
-import 'views/screens/flashlight_home_screen.dart';
+import 'views/screens/torch_home_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

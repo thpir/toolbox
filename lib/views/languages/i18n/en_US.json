@@ -34,7 +34,7 @@
         "qr_code_app": "QR-Code",
         "calculator_app": "Calculator",
         "ar_ruler_app": "3D Ruler",
-        "flashlight_app": "Flashlight",
+        "flashlight_app": "Torch",
 
     "RULER": "RULER",
 
@@ -111,5 +111,18 @@
         "ar_ruler_info_dialog_title": "Information",
         "ar_ruler_info_dialog_content": "Wait for the virtual plane to appear. Then tap that plane to place a virtual measurement point in the room. \n\nMeasuring outside the detected plane is not possible. \n\nIf no plane appears, move the phone around or consider to add more light in the room.",
         "ar_ruler_node_error": "Adding Node to Anchor failed",
-        "ar_ruler_anchor_error": "Adding Anchor failed"
+        "ar_ruler_anchor_error": "Adding Anchor failed",
+
+    "TORCH": "TORCH",
+
+        "torch_on": "Torch On",
+        "torch_off": "Torch Off",
+        "edittext_label": "Morse Encoder",
+        "edittext_hint": "Enter text to encode",
+        "button_stop": "Stop",
+        "button_play_loop": "Play Loop",
+        "button_play_once": "Play once",
+        "tab_1": "Morse\nChart",
+        "tab_2": "Torch",
+        "tab_3": "Morse\nEncoder"
 }
