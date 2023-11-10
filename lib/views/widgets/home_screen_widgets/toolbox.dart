@@ -17,7 +17,7 @@ class Toolbox extends StatefulWidget {
   State<Toolbox> createState() => _ToolboxState();
 }
 
-class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
+class _ToolboxState extends State<Toolbox> with TickerProviderStateMixin {
   SvgData svgData = SvgData();
   AppList appList = AppList();
   var searchList = <App>[];
@@ -35,8 +35,7 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
     searchList = appList.appList;
     _animationController = AnimationController(
       vsync: this,
-      duration:
-          const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
     );
     _animation = Tween<Offset>(
       begin: const Offset(0, 1),
@@ -45,12 +44,18 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
       parent: _animationController,
       curve: Curves.easeInOut,
     ));
+    startAnimation();
   }
 
   @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  Future<void> startAnimation() async {
+    await Future.delayed(const Duration(seconds: 1));
+    startImageTimer();
   }
 
   void filterSearchResults(String query) {
@@ -116,7 +121,12 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
       fit: StackFit.expand,
       children: [
         ToolboxInstructions(width: width, height: height),
-        AppGridview(height: height, animation: _animation, isListViewVisible: _isListViewVisible, width: width, searchList: searchList),
+        AppGridview(
+            height: height,
+            animation: _animation,
+            isListViewVisible: _isListViewVisible,
+            width: width,
+            searchList: searchList),
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
@@ -128,7 +138,7 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
                   Theme.of(context).scaffoldBackgroundColor,
                   Theme.of(context).scaffoldBackgroundColor,
                   Theme.of(context).scaffoldBackgroundColor,
-                  Theme.of(context).scaffoldBackgroundColor,
+                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
                   Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
                 ],
                 begin: Alignment.bottomCenter,
@@ -167,8 +177,7 @@ class _ToolboxState extends State<Toolbox> with SingleTickerProviderStateMixin {
                   hintText: 'toolbox_widget_textfield_hinttext'.i18n(),
                   prefixIcon: const Icon(Icons.search),
                   border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(25.0))
-                  ),
+                      borderRadius: BorderRadius.all(Radius.circular(25.0))),
                 ),
               ),
             ),

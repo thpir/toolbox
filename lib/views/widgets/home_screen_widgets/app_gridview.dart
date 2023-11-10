@@ -48,7 +48,9 @@ class AppGridview extends StatelessWidget {
         decoration: BoxDecoration(
             color: Theme.of(context).scaffoldBackgroundColor,
             image: DecorationImage(
-                image: AssetImage(checkUIMode(uiThemeProvider.uiMode) ? 'assets/images/background_toolbox_dark.png': 'assets/images/background_toolbox.png'),
+                image: AssetImage(checkUIMode(uiThemeProvider.uiMode)
+                    ? 'assets/images/background_toolbox_dark.png'
+                    : 'assets/images/background_toolbox.png'),
                 fit: BoxFit.cover)),
         height: height,
         child: SlideTransition(
@@ -58,8 +60,8 @@ class AppGridview extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: width <= 500 ? 2 : 3,
                 ),
                 padding: EdgeInsets.only(
                     left: 20, right: 20, top: 80, bottom: width * 0.6),
@@ -69,7 +71,7 @@ class AppGridview extends StatelessWidget {
                     name: searchList[index].name,
                     assetpath: searchList[index].assetPath,
                     route: searchList[index].route,
-                    size: width / 4,
+                    size: width <= 400 ? width / 4 : 150,
                   );
                 },
               ),

@@ -105,6 +105,9 @@ flutter:
     - assets/images/international_morse_code_dark.png
     - assets/pin_final.bin
     - assets/pin_final.gltf
+    - assets/images/launcher_icons/icon_toolbox_v2.png
+    - assets/images/launcher_icons/icon_toolbox_v2_full.png
+    - assets/images/launcher_icons/icon_bg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -121,6 +124,7 @@ flutter:
 
 flutter_launcher_icons:
   android: "launcher_icon"
-  ios: true
-  image_path: "assets/images/icon_toolbox_color.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
+  min_sdk_android: 21 
+  image_path: "assets/images/launcher_icons/icon_toolbox_v2_full.png"
+  adaptive_icon_background: "assets/images/launcher_icons/icon_bg.png"
+  adaptive_icon_foreground: "assets/images/launcher_icons/icon_toolbox_v2.png"

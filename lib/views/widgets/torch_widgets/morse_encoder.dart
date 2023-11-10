@@ -45,16 +45,16 @@ class _MorseEncoderState extends State<MorseEncoder> {
           setState(() {
             torchController.torchOn();
           });
-          await Future.delayed(Duration(seconds: dashDot));
+          await Future.delayed(Duration(milliseconds: ((dashDot * 1000) ~/ 2)));
           setState(() {
             torchController.torchOff();
           });
-          await Future.delayed(const Duration(seconds: 1));
+          await Future.delayed(const Duration(milliseconds: ((1 * 1000) ~/ 2)));
           if (!_playingLoop && !_playingOnce) {
             break;
           }
         }
-        await Future.delayed(const Duration(seconds: 3));
+        await Future.delayed(const Duration(milliseconds: ((3 * 1000)  ~/ 2)));
       } catch (error) {
         // No char
       }

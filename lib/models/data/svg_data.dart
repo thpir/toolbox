@@ -1,7 +1,7 @@
 class SvgData {
   List<String> toolboxList = [
     '''
-      <svg width="200" height="120" viewBox="-10 80 220 120" xmlns="http://www.w3.org/2000/svg">    
+      <svg width="200" height="120" viewBox="-10 70 220 120" xmlns="http://www.w3.org/2000/svg">    
             <path  
                 d="  
                 M 60.5 189.5  
@@ -87,7 +87,7 @@ class SvgData {
         </svg>
     ''',
     '''
-      <svg width="200" height="120" viewBox="-10 80 220 120" xmlns="http://www.w3.org/2000/svg">    
+      <svg width="200" height="120" viewBox="-10 70 220 120" xmlns="http://www.w3.org/2000/svg">    
             <path  
                 d="  
                 M 60.5 189.5  
@@ -216,7 +216,7 @@ class SvgData {
       </svg>
     ''',
     '''
-      <svg width="200" height="120" viewBox="-10 80 220 120" xmlns="http://www.w3.org/2000/svg">   
+      <svg width="200" height="120" viewBox="-10 70 220 120" xmlns="http://www.w3.org/2000/svg">   
             <path  
                 d="  
                 M 60.5 189.5  
@@ -345,7 +345,7 @@ class SvgData {
       </svg>
     ''',
     '''
-      <svg width="200" height="120" viewBox="-10 80 220 120" xmlns="http://www.w3.org/2000/svg">
+      <svg width="200" height="120" viewBox="-10 70 220 120" xmlns="http://www.w3.org/2000/svg">
             <path  
                 d="  
                 M 60.5 189.5  
@@ -474,7 +474,7 @@ class SvgData {
       </svg>
     ''',
     '''
-      <svg width="200" height="120" viewBox="-10 80 220 120" xmlns="http://www.w3.org/2000/svg">    
+      <svg width="200" height="120" viewBox="-10 70 220 120" xmlns="http://www.w3.org/2000/svg">    
             <path  
                 d="  
                 M 60.5 189.5  
@@ -603,7 +603,7 @@ class SvgData {
       </svg>
     ''',
     '''
-      <svg width="200" height="120" viewBox="-10 80 220 120" xmlns="http://www.w3.org/2000/svg">    
+      <svg width="200" height="120" viewBox="-10 70 220 120" xmlns="http://www.w3.org/2000/svg">    
             <path  
                 d="  
                 M 60.5 189.5  
@@ -732,7 +732,7 @@ class SvgData {
       </svg>
     ''',
     '''
-      <svg width="200" height="120" viewBox="-10 80 220 120" xmlns="http://www.w3.org/2000/svg">   
+      <svg width="200" height="120" viewBox="-10 70 220 120" xmlns="http://www.w3.org/2000/svg">   
             <path  
                 d="  
                 M 60.5 189.5  
@@ -861,7 +861,7 @@ class SvgData {
       </svg>
     ''',
     '''
-      <svg width="200" height="120" viewBox="-10 80 220 120" xmlns="http://www.w3.org/2000/svg">    
+      <svg width="200" height="120" viewBox="-10 70 220 120" xmlns="http://www.w3.org/2000/svg">    
             <path  
                 d="  
                 M 60.5 189.5  
@@ -990,7 +990,7 @@ class SvgData {
       </svg>
     ''',
     '''
-      <svg width="200" height="120" viewBox="-10 80 220 120" xmlns="http://www.w3.org/2000/svg">    
+      <svg width="200" height="120" viewBox="-10 70 220 120" xmlns="http://www.w3.org/2000/svg">    
             <path  
                 d="  
                 M 60.5 189.5  
