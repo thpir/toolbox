@@ -26,7 +26,7 @@ class AppGridview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final uiThemeProvider = Provider.of<UiThemeProvider>(context);
-
+    print('>>>>>>> Screenwidth: $width');
     bool checkUIMode(String uiMode) {
       if (uiMode == 'dark') {
         return true;
@@ -61,7 +61,7 @@ class AppGridview extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: width <= 500 ? 2 : 3,
+                  crossAxisCount: width <= 800 ? 2 : 3,
                 ),
                 padding: EdgeInsets.only(
                     left: 20, right: 20, top: 80, bottom: width * 0.6),
@@ -71,7 +71,7 @@ class AppGridview extends StatelessWidget {
                     name: searchList[index].name,
                     assetpath: searchList[index].assetPath,
                     route: searchList[index].route,
-                    size: width <= 400 ? width / 4 : 150,
+                    size: width <= 800 ? width / 4 : 150,
                   );
                 },
               ),
