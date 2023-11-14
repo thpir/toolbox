@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:barcode_parser/barcode_parser.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
+import '../../controllers/storage/shared_prefs/shared_prefs_providers/ui_theme_provider.dart';
+import '../../models/screen_props.dart';
 import '../widgets/qr_screen_widgets/contact_scan_widget.dart';
 import '../widgets/qr_screen_widgets/url_scan_widget.dart';
 import '../../controllers/message_controller.dart';
@@ -14,6 +17,22 @@ class QRCodeResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final result = ModalRoute.of(context)!.settings.arguments as String;
+    final uiProvider = Provider.of<UiThemeProvider>(context, listen: true);
+
+    bool checkUIMode(String uiMode) {
+      if (uiMode == 'dark') {
+        return true;
+      } else if (uiMode == 'light') {
+        return false;
+      } else {
+        final darkMode = ScreenProps.isDarkMode(context);
+        if (darkMode) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
 
     Widget parseBarcode(String scannedString) {
       BarcodeParser barcodeParser = BarcodeParser();
@@ -28,7 +47,9 @@ class QRCodeResultScreen extends StatelessWidget {
           BarcodeWifi barcodeWifi = barcode as BarcodeWifi;
           return Center(
             child: Text(
-              'qr_result_text_wifi'.i18n() + barcodeWifi.toString() + 'qr_result_trailing_text_wifi'.i18n(),
+              'qr_result_text_wifi'.i18n() +
+                  barcodeWifi.toString() +
+                  'qr_result_trailing_text_wifi'.i18n(),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           );
@@ -44,7 +65,9 @@ class QRCodeResultScreen extends StatelessWidget {
           BarcodeLocation barcodeLocation = barcode as BarcodeLocation;
           return Center(
             child: Text(
-              'qr_result_text_location'.i18n() + barcodeLocation.toString() + 'qr_result_trailing_text_location'.i18n(),
+              'qr_result_text_location'.i18n() +
+                  barcodeLocation.toString() +
+                  'qr_result_trailing_text_location'.i18n(),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           );
@@ -52,7 +75,9 @@ class QRCodeResultScreen extends StatelessWidget {
           BarcodeEmail barcodeEmail = barcode as BarcodeEmail;
           return Center(
             child: Text(
-              'qr_result_text_email'.i18n() + barcodeEmail.toString() + 'qr_result_trailing_text_email'.i18n(),
+              'qr_result_text_email'.i18n() +
+                  barcodeEmail.toString() +
+                  'qr_result_trailing_text_email'.i18n(),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           );
@@ -60,7 +85,9 @@ class QRCodeResultScreen extends StatelessWidget {
           BarcodeSms barcodeSms = barcode as BarcodeSms;
           return Center(
             child: Text(
-              'qr_result_text_sms'.i18n() + barcodeSms.toString() + 'qr_result_trailing_text_sms'.i18n(),
+              'qr_result_text_sms'.i18n() +
+                  barcodeSms.toString() +
+                  'qr_result_trailing_text_sms'.i18n(),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           );
@@ -69,7 +96,9 @@ class QRCodeResultScreen extends StatelessWidget {
               barcode as BarcodeCalendarEvent;
           return Center(
             child: Text(
-              'qr_result_text_calendar'.i18n() + barcodeCalendarEvent.toString() + 'qr_result_trailing_text_calendar'.i18n(),
+              'qr_result_text_calendar'.i18n() +
+                  barcodeCalendarEvent.toString() +
+                  'qr_result_trailing_text_calendar'.i18n(),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           );
@@ -77,7 +106,9 @@ class QRCodeResultScreen extends StatelessWidget {
           BarcodePhone barcodePhone = barcode as BarcodePhone;
           return Center(
             child: Text(
-              'qr_result_text_phone'.i18n() + barcodePhone.toString() + 'qr_result_trailing_text_phone'.i18n(),
+              'qr_result_text_phone'.i18n() +
+                  barcodePhone.toString() +
+                  'qr_result_trailing_text_phone'.i18n(),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           );
@@ -86,7 +117,9 @@ class QRCodeResultScreen extends StatelessWidget {
               barcode as BarcodeDriverLicense;
           return Center(
             child: Text(
-              'qr_result_text_licence'.i18n() + barcodeDriverLicense.toString() + 'qr_result_trailing_text_licence'.i18n(),
+              'qr_result_text_licence'.i18n() +
+                  barcodeDriverLicense.toString() +
+                  'qr_result_trailing_text_licence'.i18n(),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           );
@@ -160,13 +193,23 @@ class QRCodeResultScreen extends StatelessWidget {
           actions: <Widget>[
             IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/', ((route) => false));
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/', ((route) => false));
               },
               icon: const Icon(Icons.home),
             ),
           ],
         ),
-        body: parseBarcode(result));
+        body: Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                image: DecorationImage(
+                    image: AssetImage(checkUIMode(uiProvider.uiMode)
+                        ? 'assets/images/background_toolbox_dark.png'
+                        : 'assets/images/background_toolbox.png'),
+                    fit: BoxFit.cover)),
+            child: parseBarcode(result)));
   }
 }

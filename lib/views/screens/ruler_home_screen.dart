@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../controllers/storage/shared_prefs/shared_prefs_providers/ui_theme_provider.dart';
+import '../../models/screen_props.dart';
 import '../widgets/ruler_home_screen_widgets/horizontal_ruler.dart';
 import '../widgets/ruler_home_screen_widgets/vertical_ruler.dart';
 import '../widgets/ruler_home_screen_widgets/ruler_origin.dart';
@@ -29,7 +31,23 @@ class _RulerHomescreenState extends State<RulerHomescreen> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as App;
+    final uiProvider = Provider.of<UiThemeProvider>(context, listen: true);
     RulerController rulerController = RulerController(context);
+
+    bool checkUIMode(String uiMode) {
+      if (uiMode == 'dark') {
+        return true;
+      } else if (uiMode == 'light') {
+        return false;
+      } else {
+        final darkMode = ScreenProps.isDarkMode(context);
+        if (darkMode) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
 
     return Consumer2<MetricsProvider, CalibrationProvider>(
       builder: (context, metrics, calibrationMode, _) => Scaffold(
@@ -42,13 +60,14 @@ class _RulerHomescreenState extends State<RulerHomescreen> {
                 },
                 icon: const Icon(Icons.home)),
             IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed('/ruler-measurement-list-screen');
-            },
-            icon: const Icon(
-              Icons.history_sharp,
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed('/ruler-measurement-list-screen');
+              },
+              icon: const Icon(
+                Icons.history_sharp,
+              ),
             ),
-          ),
           ],
         ),
         body: FutureBuilder(
@@ -60,15 +79,28 @@ class _RulerHomescreenState extends State<RulerHomescreen> {
                 );
               } else {
                 rulerController.mm = metrics.metrics;
-                rulerController.standardCalibration = calibrationMode.calibrationMode;
-                rulerController.calibrationValue = calibrationMode.calibrationValue;
+                rulerController.standardCalibration =
+                    calibrationMode.calibrationMode;
+                rulerController.calibrationValue =
+                    calibrationMode.calibrationValue;
                 return Stack(
                   children: <Widget>[
+                    Container(
+                      height: double.infinity,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          image: DecorationImage(
+                              image: AssetImage(checkUIMode(uiProvider.uiMode)
+                                  ? 'assets/images/background_toolbox_dark.png'
+                                  : 'assets/images/background_toolbox.png'),
+                              fit: BoxFit.cover)),
+                    ),
                     VerticalRuler(
-                        rulerController: rulerController,
+                      rulerController: rulerController,
                     ),
                     HorizontalRuler(
-                        rulerController: rulerController,
+                      rulerController: rulerController,
                     ),
                     RulerOrigin(
                       rulerController: rulerController,
@@ -83,7 +115,11 @@ class _RulerHomescreenState extends State<RulerHomescreen> {
         drawer: HomeDrawer(
           appName: args.name,
           avatarPath: args.assetPath,
-          drawerContent: const [ListTileUi(), ListTileMetrics(), ListTileCalibration()],
+          drawerContent: const [
+            ListTileUi(),
+            ListTileMetrics(),
+            ListTileCalibration()
+          ],
         ),
       ),
     );

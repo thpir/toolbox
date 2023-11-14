@@ -26,13 +26,24 @@ class MorseChart extends StatelessWidget {
       }
     }
 
-    return Center(
-      child: Image.asset(
-        checkUIMode(uiProvider.uiMode)
-            ? 'assets/images/international_morse_code_dark.png'
-            : 'assets/images/international_morse_code.png',
-        width: double.infinity,
-        fit: BoxFit.contain,
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          image: DecorationImage(
+              image: AssetImage(checkUIMode(uiProvider.uiMode)
+                  ? 'assets/images/background_toolbox_dark.png'
+                  : 'assets/images/background_toolbox.png'),
+              fit: BoxFit.cover)),
+      child: Center(
+        child: Image.asset(
+          checkUIMode(uiProvider.uiMode)
+              ? 'assets/images/international_morse_code_dark.png'
+              : 'assets/images/international_morse_code.png',
+          width: double.infinity,
+          fit: BoxFit.contain,
+        ),
       ),
     );
   }

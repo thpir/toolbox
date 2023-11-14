@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:localization/localization.dart';
 
+import '../../controllers/storage/shared_prefs/shared_prefs_providers/ui_theme_provider.dart';
 import '../../models/ruler_measurement.dart';
 import '../../controllers/storage/databases/database_provider.dart/database_provider.dart';
+import '../../models/screen_props.dart';
 
 class RulerMeasurementsListScreen extends StatefulWidget {
   static const routeName = '/ruler-measurement-list-screen';
@@ -64,6 +66,23 @@ class _RulerMeasurementsListScreenState
 
   @override
   Widget build(BuildContext context) {
+    final uiProvider = Provider.of<UiThemeProvider>(context, listen: true);
+
+    bool checkUIMode(String uiMode) {
+      if (uiMode == 'dark') {
+        return true;
+      } else if (uiMode == 'light') {
+        return false;
+      } else {
+        final darkMode = ScreenProps.isDarkMode(context);
+        if (darkMode) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -82,46 +101,71 @@ class _RulerMeasurementsListScreenState
               )
             : Consumer<DatabaseProvider>(builder: (ctx, measurements, child) {
                 if (measurements.items.isEmpty) {
-                  return child ??
-                      Center(
-                        child: Text(
-                          'no_measurements_text'.i18n(),
-                          style: Theme.of(context).textTheme.bodyMedium,
+                  return Container(
+                    height: double.infinity,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          image: DecorationImage(
+                              image: AssetImage(checkUIMode(uiProvider.uiMode)
+                                  ? 'assets/images/background_toolbox_dark.png'
+                                  : 'assets/images/background_toolbox.png'),
+                              fit: BoxFit.cover)),
+                    child: child ??
+                        Center(
+                          child: Text(
+                            'no_measurements_text'.i18n(),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
                         ),
-                      );
+                  );
                 } else {
-                  return ListView.builder(
-                    reverse: true,
-                    shrinkWrap: true,
-                    itemCount: measurements.items.length,
-                    itemBuilder: (ctx, i) => ListTile(
-                        title: Text(measurements.items[i].value),
-                        subtitle: Text(measurements.items[i].description),
-                        trailing: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              icon: Icon(
-                                Icons.edit,
-                                color: Theme.of(context).focusColor,
-                              ),
-                              onPressed: () {
-                                _editItem(measurements.items[i]);
-                              },
-                            ),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.delete_outline,
-                                color: Colors.red,
-                              ),
-                              onPressed: () {
-                                _deleteItem(measurements.items[i].id);
-                              },
-                            ),
-                          ],
-                        )),
+                  return Container(
+                    height: double.infinity,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          image: DecorationImage(
+                              image: AssetImage(checkUIMode(uiProvider.uiMode)
+                                  ? 'assets/images/background_toolbox_dark.png'
+                                  : 'assets/images/background_toolbox.png'),
+                              fit: BoxFit.cover)),
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: ListView.builder(
+                        reverse: false,
+                        shrinkWrap: true,
+                        itemCount: measurements.items.length,
+                        itemBuilder: (ctx, i) => ListTile(
+                            title: Text(measurements.items[i].value),
+                            subtitle: Text(measurements.items[i].description),
+                            trailing: Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.edit,
+                                    color: Theme.of(context).focusColor,
+                                  ),
+                                  onPressed: () {
+                                    _editItem(measurements.items[i]);
+                                  },
+                                ),
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.delete_outline,
+                                    color: Colors.red,
+                                  ),
+                                  onPressed: () {
+                                    _deleteItem(measurements.items[i].id);
+                                  },
+                                ),
+                              ],
+                            )),
+                      ),
+                    ),
                   );
                 }
               }),

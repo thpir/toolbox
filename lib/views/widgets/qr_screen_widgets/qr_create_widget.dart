@@ -22,7 +22,7 @@ class _QRCreateWidgetState extends State<QRCreateWidget> {
 
   @override
   void dispose() {
-    final qrController = Provider.of<QRController>(context);
+    final qrController = Provider.of<QRController>(context, listen: false);
     qrController.disposeController();
     super.dispose();
   }

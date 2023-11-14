@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:localization/localization.dart';
+import 'package:provider/provider.dart';
 
+import '../../controllers/storage/shared_prefs/shared_prefs_providers/ui_theme_provider.dart';
 import '../../models/app.dart';
 import '../../models/screen_props.dart';
 import '../../views/widgets/general_widgets/home_drawer.dart';
@@ -75,10 +77,28 @@ class _CompassHomeScreenState extends State<CompassHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as App;
+    final uiProvider = Provider.of<UiThemeProvider>(context, listen: true);
     double width = ScreenProps.getScreenWidth(context);
+    
     if (width > 700) {
       width = 700;
     }
+
+    bool checkUIMode(String uiMode) {
+      if (uiMode == 'dark') {
+        return true;
+      } else if (uiMode == 'light') {
+        return false;
+      } else {
+        final darkMode = ScreenProps.isDarkMode(context);
+        if (darkMode) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -98,6 +118,17 @@ class _CompassHomeScreenState extends State<CompassHomeScreen> {
       body: Stack(
         children: _centered 
           ? <Widget>[
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              image: DecorationImage(
+              image: AssetImage(checkUIMode(uiProvider.uiMode)
+                  ? 'assets/images/background_toolbox_dark.png'
+                  : 'assets/images/background_toolbox.png'),
+              fit: BoxFit.cover)),
+            ),
             AnimatedAlign(
               alignment: _alignment,
               duration: const Duration(milliseconds: 200),

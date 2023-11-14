@@ -13,11 +13,7 @@ class FlashlightHomeScreen extends StatelessWidget {
   const FlashlightHomeScreen({super.key});
 
   List<Widget> _tabChildren() {
-    return [
-      const MorseChart(),
-      const TorchButton(),
-      const MorseEncoder()
-    ];
+    return [const MorseChart(), const TorchButton(), const MorseEncoder()];
   }
 
   @override
@@ -42,8 +38,7 @@ class FlashlightHomeScreen extends StatelessWidget {
                 },
                 icon: const Icon(Icons.home)),
           ],
-          bottom:
-              TabBar(indicatorColor: Theme.of(context).focusColor, tabs: [
+          bottom: TabBar(indicatorColor: Theme.of(context).focusColor, tabs: [
             Tab(
               child: Text(
                 'tab_1'.i18n(),

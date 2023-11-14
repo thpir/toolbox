@@ -16,6 +16,7 @@ class CalculatorDisplay extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         child: Container(
           decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               border: Border.all(color: Colors.grey)),
           child: Align(
